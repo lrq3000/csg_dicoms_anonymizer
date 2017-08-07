@@ -3,7 +3,9 @@ include LICENCE
 include README.rst
 
 # Aux libs
-recursive-include csg_dicoms_anonymizer/csg_fileutil_libs *.py
+recursive-include csg_dicoms_anonymizer/csg_fileutil_libs *.*
+recursive-exclude csg_dicoms_anonymizer/csg_fileutil_libs *.pyc
+recursive-exclude csg_dicoms_anonymizer/csg_fileutil_libs *.pyd
 
 # PyInstaller builder
 include csg_dicoms_anonymizer/csg_dicoms_anonymizer_pyinstaller-win64.bat

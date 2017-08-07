@@ -27,7 +27,9 @@
 
 from __future__ import print_function
 
-__version__ = '1.3.4'
+from _version import __version__
+
+__all__ = ['main']
 
 
 # # AUX FUNCS

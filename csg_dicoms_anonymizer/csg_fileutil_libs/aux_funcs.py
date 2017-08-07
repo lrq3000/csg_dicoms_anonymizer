@@ -46,9 +46,14 @@ def save_dict_as_csv(d, output_file, fields_order=None, csv_order_by=None, verbo
         fields_order = []
     # Get dict/list values
     if isinstance(d, dict):
-        dvals = d.values()
+        dvals = list(d.values())
     else:
         dvals = d
+    # dict is empty, maybe no match was found? Then we just save an empty csv
+    if not dvals:
+        with open(output_file, 'wb') as f:
+            f.write('')
+        return
     # Then automatically add any other field (which order we don't care, they will be appended in alphabetical order)
     fields_order_check = set(fields_order)
     for missing_field in sorted(dvals[0]):

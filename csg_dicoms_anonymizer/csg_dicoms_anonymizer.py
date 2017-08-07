@@ -1,6 +1,6 @@
 # coding: utf-8
 #
-# Dicoms anonymizer
+# CSG Dicoms Anonymizer
 # By Stephen Larroque @ Coma Science Group, GIGA Research, University of Liege
 # Creation date: 2017-02-07
 # License: MIT
@@ -14,7 +14,7 @@
 # * check if recursion ok (to anonymize MRI & PET at the same time for example).
 # * convert cells to functions
 # * put in a python script and use gooey (except if --cmd passed as argument)
-# * freeze using pyinstaller (use @pyinstaller --noconsole csg_fileutil_dicoms_anonymizer.py)
+# * freeze using pyinstaller (use @pyinstaller --noconsole csg_dicoms_anonymizer.py)
 # * make a nice progress bar in gooey? add support in tqdm?
 #
 
@@ -27,7 +27,7 @@
 
 from __future__ import print_function
 
-__version__ = '1.3.2'
+__version__ = '1.3.4'
 
 
 # # AUX FUNCS
@@ -310,7 +310,7 @@ def conditional_decorator(flag, dec):  # pragma: no cover
 
 def check_gui_arg():  # pragma: no cover
     """Check that the --gui argument was passed, and if true, we remove the --gui option and replace by --gui_launched so that Gooey does not loop infinitely"""
-    if len(sys.argv) > 1 and '--cmd' in sys.argv:
+    if len(sys.argv) > 1 or '--cmd' in sys.argv:
         # DEPRECATED since Gooey automatically supply a --ignore-gooey argument when calling back the script for processing
         #sys.argv[1] = '--gui_launched' # CRITICAL: need to remove/replace the --gui argument, else it will stay in memory and when Gooey will call the script again, it will be stuck in an infinite loop calling back and forth between this script and Gooey. Thus, we need to remove this argument, but we also need to be aware that Gooey was called so that we can call gooey.GooeyParser() instead of argparse.ArgumentParser() (for better fields management like checkboxes for boolean arguments). To solve both issues, we replace the argument --gui by another internal argument --gui_launched.
         return False
@@ -340,7 +340,7 @@ def main(argv=None, return_report=False):
     #==== COMMANDLINE PARSER ====
 
     #== Commandline description
-    desc = '''Dicoms anonymizer v%s
+    desc = '''CSG Dicoms Anonymizer v%s
 Description: Anonymize dicoms and demographics using undecryptable hashs.
 
 Note: use --cmd to avoid launching the graphical interface and use as a commandline tool.
@@ -350,7 +350,7 @@ Note: use --cmd to avoid launching the graphical interface and use as a commandl
     #== Commandline arguments
     #-- Constructing the parser
     # Use GooeyParser if we want the GUI because it will provide better widgets
-    if (not '--cmd' in argv and not '--ignore-gooey' in argv):  # pragma: no cover
+    if (not '--cmd' in argv and not '--ignore-gooey' in argv and not '--help' in argv and not '-h' in argv):  # pragma: no cover
         # Initialize the Gooey parser
         main_parser = gooey.GooeyParser(add_help=True, description=desc, epilog=ep, formatter_class=argparse.RawTextHelpFormatter)
         # Define Gooey widget types explicitly (because type auto-detection doesn't work quite well)
@@ -676,7 +676,6 @@ Note: use --cmd to avoid launching the graphical interface and use as a commandl
         if dist_matches[uniquename]:
             for csv_name in dist_matches[uniquename]:
                 csvname_to_uniquename[csv_name] = uniquename
-    csvname_to_uniquename
 
 
     # In[ ]:
@@ -1041,9 +1040,6 @@ Note: use --cmd to avoid launching the graphical interface and use as a commandl
     uni_rootpath = unicode(rootpath, 'latin1')  # convert rootpath to unicode before walking with os.listdir and recwalk, so we get back unicode strings too (else we won't be able to enter folders with accentuated characters)
     if rename_folders:
         print('Launching anonymization of dicom folders, please wait...')
-        # Get folder_to_name mapping
-        _, folder_to_name = get_dcm_names_from_dir(uni_rootpath)
-        _, folder_to_name = get_dcm_names_from_zip(uni_rootpath, folder_to_name=folder_to_name)
         # Get list of folders
         subjects_list = get_list_of_folders(uni_rootpath)
         for subject in _tqdm(subjects_list, unit='folder', desc='RENAME', file=sys.stdout):
@@ -1089,14 +1085,33 @@ Note: use --cmd to avoid launching the graphical interface and use as a commandl
 
     # Shorten (again) anonymized demographics to only the subjects we have dicom folders for
     demo_anon_csv = 'demographics_anonymized.csv'
-    cf_anon = pd.read_csv(demo_anon_csv, sep=';').fillna('')
+    with open(demo_anon_csv) as f:
+        cf_anon = list(csv.DictReader(f, delimiter=';'))
     # Get list of anonymized dicom names
     dcm_ids, _ = get_dcm_names_from_dir(rootpath)
     # Shorten anonymized demographics to only the ids present in dicoms
-    cf_anon = cf_anon[cf_anon['name'].isin(dcm_ids)]
+    for rowid in range(len(cf_anon)):
+        if cf_anon[rowid]['name'] not in dcm_ids:
+            del cf_anon[rowid]
+            for col in demo_cols_drop:
+                if col in cf_anon[rowid]:
+                    del cf_anon[rowid][col]
+    # Save anonymized demographics
+    demo_anon_short_csv = 'demographics_anonymized_shortened.csv'
+    save_dict_as_csv(cf_anon, demo_anon_short_csv, fields_order=['name'], csv_order_by='name', verbose=False)
+    print('Shortened anonymized demographics (to only the dicoms available) were saved to %s.' % demo_anon_short_csv)
+
+    # TODO: PANDAS VERSION: to delete if the above works (no pandas = smaller standalone package)
+    # Shorten (again) anonymized demographics to only the subjects we have dicom folders for
+    #demo_anon_csv = 'demographics_anonymized.csv'
+    #cf_anon = pd.read_csv(demo_anon_csv, sep=';').fillna('')
+    # Get list of anonymized dicom names
+    #dcm_ids, _ = get_dcm_names_from_dir(rootpath)
+    # Shorten anonymized demographics to only the ids present in dicoms
+    #cf_anon = cf_anon[cf_anon['name'].isin(dcm_ids)]
     # Save shortened anonymized demographics
-    cf_anon.to_csv(demo_anon_csv, sep=';', na_rep='NA', index=False)
-    print('Shortened anonymized demographics (to only the dicoms available) were saved to %s.' % demo_anon_csv)
+    #cf_anon.to_csv(demo_anon_csv, sep=';', na_rep='NA', index=False)
+    #print('Shortened anonymized demographics (to only the dicoms available) were saved to %s.' % demo_anon_csv)
 
 
     # In[ ]:

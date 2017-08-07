@@ -3,7 +3,11 @@ csg_dicoms_anonymizer
 
 |PyPI-Status| |PyPI-Versions| |LICENCE|
 
-This dicoms anonymizer was made to make your life easier as a clinician sharing data. It runs under Python 2.7 (it was not tested nor developped with compatibility with Python 3 in mind, although it might work with some slight changes).
+This dicoms anonymizer was made to make your life easier as a clinician sharing data.
+
+|Screenshot|
+
+It runs under Python 2.7 (it was not tested nor developped with compatibility with Python 3 in mind, although it might work with some slight changes).
 
 This is a generic dicoms anonymizer with an emphasis on:
 
@@ -45,3 +49,4 @@ CSG Dicoms Anonymizer was initially made by Stephen Larroque <LRQ3000> for the C
    :target: https://pypi.python.org/pypi/csg_dicoms_anonymizer
 .. |PyPI-Versions| image:: https://img.shields.io/pypi/pyversions/csg_dicoms_anonymizer.svg
    :target: https://pypi.python.org/pypi/csg_dicoms_anonymizer
+.. |Screenshot| image:: https://raw.githubusercontent.com/lrq3000/csg_dicoms_anonymizer/master/img/dicoms_anonymizer_gui.png

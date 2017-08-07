@@ -11,4 +11,4 @@ recursive-exclude csg_dicoms_anonymizer/csg_fileutil_libs *.pyd
 include csg_dicoms_anonymizer/csg_dicoms_anonymizer_pyinstaller-win64.bat
 
 # Documentation
-recursive-include doc *
+graft doc

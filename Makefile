@@ -24,14 +24,14 @@ distclean:
 prebuildclean:
 	@+python -c "import shutil; shutil.rmtree('build', True)"
 	@+python -c "import shutil; shutil.rmtree('dist', True)"
-	@+python -c "import shutil; shutil.rmtree('fdict.egg-info', True)"
+	@+python -c "import shutil; shutil.rmtree('csg_dicoms_anonymizer.egg-info', True)"
 coverclean:
 	@+python -c "import os; os.remove('.coverage') if os.path.exists('.coverage') else None"
 clean:
 	@+python -c "import os; import glob; [os.remove(i) for i in glob.glob('*.py[co]')]"
-	@+python -c "import os; import glob; [os.remove(i) for i in glob.glob('fdict/*.py[co]')]"
-	@+python -c "import os; import glob; [os.remove(i) for i in glob.glob('fdict/tests/*.py[co]')]"
-	@+python -c "import os; import glob; [os.remove(i) for i in glob.glob('fdict/examples/*.py[co]')]"
+	@+python -c "import os; import glob; [os.remove(i) for i in glob.glob('csg_dicoms_anonymizer/*.py[co]')]"
+	@+python -c "import os; import glob; [os.remove(i) for i in glob.glob('csg_dicoms_anonymizer/tests/*.py[co]')]"
+	@+python -c "import os; import glob; [os.remove(i) for i in glob.glob('csg_dicoms_anonymizer/examples/*.py[co]')]"
 
 installdev:
 	python setup.py develop --uninstall

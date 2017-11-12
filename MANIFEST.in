@@ -8,7 +8,7 @@ recursive-exclude csg_dicoms_anonymizer/csg_fileutil_libs *.pyc
 recursive-exclude csg_dicoms_anonymizer/csg_fileutil_libs *.pyd
 
 # PyInstaller builder
-include csg_dicoms_anonymizer/csg_dicoms_anonymizer_pyinstaller-win64.bat
+include csg_dicoms_anonymizer.spec
 
 # Documentation
 graft doc

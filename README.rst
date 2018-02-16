@@ -15,7 +15,7 @@ This is a generic dicoms pseudonymizer with an emphasis on:
 
 2. **Easy to anonymize demographics** : a fuzzy matching algorithm will take care of small typos and of firstname/lastname reversal (works also if there are several first names or last names). At the end, several csv files will be generated: the anonymized demographics shortened to only the patients present in the dicoms (so that you can reuse a big demographics spreadsheet of all your subjects even to anonymize only a few subjects, the shortened anonymized demographics will only contain the pertinent subjects), the list of missing subjects that are in dicoms but not in demographics (so that your recipient knows directly what demographics were not available), and a mapping to convert from anonymized ids to original patient name (useful if your collaborator requests additional information about an anonymized patient, or just to check if there is an issue).
 
-3. **Retaining potentially pertinent informations in dicoms** : instead of anonymizing all personal fields, this application anonymizes only the name (and strips out some other personal infos such as phone number, patient address, etc), but not all personal fields. Thus, anonymized dicoms will retain age, gender, date of scan, date of birth, etc. which can be then used as regression covariates or to cluster patients together. Additional fields to remove can easily be added as an argument.
+3. **Retaining potentially pertinent information in dicoms** : instead of anonymizing all personal fields, this application anonymizes only the name (and strips out some other personal infos such as phone number, patient address, etc), but not all personal fields. Thus, anonymized dicoms will retain age, gender, date of scan, date of birth, etc. which can be then used as regression covariates or to cluster patients together. Additional fields to remove can easily be added as an argument.
 
 4. **Reliability** : a name with several typos or even a missing first name will still be anonymized correctly and linked to the correct demographics entry, by using fuzzy matching based on a normalized levenshstein distance for characters mistakes and a modified normalized words jaccard distance on words switching/missing.
 
@@ -36,6 +36,8 @@ This application is provided as-is with the hopes it can be useful to someone el
 With that in mind, the following should be done to make this application a proper software:
 
 * Make demographics file optional. It is already not really necessary in the code to anonymize dicoms, an empty csv with just the 'name' column should be enough. But it would be better if it was really optional and handled correctly.
+* Make dicoms optional (enter an empty dicoms folder), so that a demographics file will still be anonymized.
+* Allow to reuse an anonymized table (find similar names and assign the same hash).
 * Refactor code: put functions above the code, delete the # [] useless comments coming from Jupyter export, move to functions some code snippets.
 * Use requirements instead of integrating submodules in csg_fileutil_libs.
 * Unit test with randomly generated dicoms.

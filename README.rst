@@ -3,13 +3,13 @@ csg_dicoms_anonymizer
 
 |PyPI-Status| |PyPI-Versions| |LICENCE|
 
-This dicoms anonymizer was made to make your life easier as a clinician sharing data.
+This dicoms anonymizer/pseudonymizer was made to make your life easier as a clinician sharing data.
 
 |Screenshot|
 
 It runs under Python 2.7 (it was not tested nor developped with compatibility with Python 3 in mind, although it might work with some slight changes).
 
-This is a generic dicoms anonymizer with an emphasis on:
+This is a generic dicoms pseudonymizer with an emphasis on:
 
 1. **Ease of use** : simply point to the folder containing all your dicoms (folders or zip files) and to the demographics file (just ensure you have a "name" column), and click "Start"! Note that you can also use it in commandline, allowing batch scripting.
 
@@ -26,6 +26,8 @@ To use this application, you must point to a folder where each subfolder is a pa
 This app can work with a GUI or from commandline interchangeably, the same features and options will be available.
 
 Another interesting feature is that you can build on top of an anonymized dataset, you can add new subjects. Indeed, each subject gets a unique id based on the name (by default) or by the order in the folder (by using the appropriate option), which makes it impossible to translate back to the original name from the id in any case.
+
+The goal of this tool is to pseudonymize the data, not anonymize according to regulations. The difference is important: private fields will be kept (except if you specify a list of fields to delete), but patients names will be replaced by anonymous pseudonyms, rendering identification by name impossible. This is important for studies, where private fields contain important informations (scanner slice timing and parameters, patient's age and gender, etc). If you want full anonymization (ie, removing/modifying all private fields), please have a look at [dicom-anon](https://github.com/chop-dbhi/dicom-anon), a Python dicoms anonymizer, with configurable specifications. Note however that this is not enough for full anonymization, as you will also need to deface (be warned this might make statistical preprocessing and analysis difficult).
 
 TODO
 ---------

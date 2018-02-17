@@ -5,7 +5,7 @@ csg_dicoms_anonymizer
 
 This dicoms anonymizer/pseudonymizer was made to make your life easier as a clinician sharing data.
 
-The first goal is to remove the patient's name and replace by a pseudonym in both dicoms and a demographics csv file, but it also takes care of deleting other structures potentially containing identifiable information such as fields (eg, patient's phone number) and files (pdf, txt, csv, etc), with a configurable blacklist.
+The first goal is to remove the patient's name and replace by a pseudonym in both dicoms and a demographics csv file, but it also takes care of deleting other structures potentially containing identifiable information such as fields (eg, patient's phone number) and files (pdf, txt, csv, etc), via configurable blacklists.
 
 |Screenshot|
 

@@ -5,6 +5,8 @@ csg_dicoms_anonymizer
 
 This dicoms anonymizer/pseudonymizer was made to make your life easier as a clinician sharing data.
 
+The first goal is to remove the patient's name and replace by a pseudonyms, but it also takes care of deleting other structures potentially containing identifiable information such as fields (eg, patient's phone number) and files (pdf, txt, csv, etc).
+
 |Screenshot|
 
 It runs under Python 2.7 (it was not tested nor developped with compatibility with Python 3 in mind, although it might work with some slight changes).
@@ -17,7 +19,7 @@ This is a generic dicoms pseudonymizer with an emphasis on:
 
 3. **Retaining potentially pertinent information in dicoms** : instead of anonymizing all personal fields, this application anonymizes only the name (and strips out some other personal infos such as phone number, patient address, etc), but not all personal fields. Thus, anonymized dicoms will retain age, gender, date of scan, date of birth, etc. which can be then used as regression covariates or to cluster patients together. Additional fields to remove can easily be added as an argument.
 
-4. **Reliability** : a name with several typos or even a missing first name will still be anonymized correctly and linked to the correct demographics entry, by using fuzzy matching based on a normalized levenshstein distance for characters mistakes and a modified normalized words jaccard distance on words switching/missing.
+4. **Reliability** : a name with several typos or even a missing first name will still be anonymized correctly and linked to the correct demographics entry, by using fuzzy matching based on a normalized levenshstein distance for characters mistakes and a modified normalized words jaccard distance on words switching/missing. In any case, if a similar name cannot be found in the demographics, it will be replaced by a pseudonym and added to the mapping.
 
 5. **Robustness** : all other dicoms anonymizers look for the name only in the PatientName field. However, there are other hidden fields which can contain the patient's name, and this changes for each machine, each center, each parametrization of a scanner. This application will robustly find all fields containing the patient's name, and will try to remove it without touching the rest of the field (which can contain critical technical data), and it always checks that the name is cleared from the whole dicom before continuing. In case the patient name remains for whatever reason, the anonymizer will stop and show an error message so that you can take the appropriate steps.
 

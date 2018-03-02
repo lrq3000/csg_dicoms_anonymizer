@@ -45,6 +45,8 @@ The goal of this tool is to pseudonymize the data, not anonymize according to re
 
 If you want full anonymization (ie, removing/modifying all private fields), please have a look at `dicom-anon <https://github.com/chop-dbhi/dicom-anon>`_, a Python dicoms anonymizer, with configurable specifications. See also `pydicom example anonymizer <https://github.com/pydicom/pydicom/blob/master/examples/metadata_processing/plot_anonymize.py>`_ and `MATLAB's dicomanon command <http://mathworks.com/help/images/ref/dicomanon.html>`_. Note however that this is not enough for full anonymization, as you will also need to deface (be warned this might make statistical preprocessing and analysis difficult).
 
+To anonymize demographics for public release, you can have a look at the excellent `ARX-Deidentifier <https://github.com/arx-deidentifier/arx>`_, which supports various methods such as k-anonymity, l-diversity or differential privacy (this can be advantageously used as a post-processing step after csg-dicoms-anonymizer's ability to de-identify names robustly). To deface dicoms, `Jorge's Defacer <https://github.com/jorgeMFS/Defacer>`_ using nipy's quickshear algorithm and in pure Python 3 is an option to consider.
+
 TODO
 ---------
 This application is provided as-is with the hopes it can be useful to someone else. It was not cleaned up beforehand more than what was sufficient for running as a standalone GUI application and packaged as a minimal size binary.

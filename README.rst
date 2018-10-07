@@ -59,6 +59,7 @@ With that in mind, the following should be done to make this application a prope
 * Refactor code: put functions above the code, delete the # [] useless comments coming from Jupyter export, move to functions some code snippets.
 * Use requirements instead of integrating submodules in csg_fileutil_libs.
 * Unit test with randomly generated dicoms.
+* Make a dicoms reorganizer and deduplicator, using UUID (instance, study and machine?), good for sanity check too (so can organize per subject, scan and machine reliably, except if info was anonymized, can leave the option to dedup or not, can check by size too). See fields: Instance UUID, Study UUID, a third one (machine UUID?)
 
 LICENSE
 -------------

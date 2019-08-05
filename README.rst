@@ -53,6 +53,7 @@ This application is provided as-is with the hopes it can be useful to someone el
 
 With that in mind, the following should be done to make this application a proper software:
 
+* CRITICAL: autodetect still images and offer option to delete them (they might contain images saved as pixels, currently the software will NOT autodetect nor remove them!)
 * Make demographics file optional. It is already not really necessary in the code to anonymize dicoms, an empty csv with just the 'name' column should be enough. But it would be better if it was really optional and handled correctly.
 * Make dicoms optional (enter an empty dicoms folder), so that a demographics file will still be anonymized.
 * Allow to reuse an anonymized table (find similar names and assign the same hash).
@@ -60,6 +61,7 @@ With that in mind, the following should be done to make this application a prope
 * Use requirements instead of integrating submodules in csg_fileutil_libs.
 * Unit test with randomly generated dicoms.
 * Make a dicoms reorganizer and deduplicator, using UUID (instance, study and machine?), good for sanity check too (so can organize per subject, scan and machine reliably, except if info was anonymized, can leave the option to dedup or not, can check by size too). See fields: Instance UUID, Study UUID, a third one (machine UUID?)
+* Option to change all dates to relative date since another field chosen by user (be it birth, acquisition time, etc).
 
 LICENSE
 -------------

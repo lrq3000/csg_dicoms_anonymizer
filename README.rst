@@ -72,7 +72,7 @@ CITATION
 
 If you found this software useful and use it for a publication, we would be very thankful if you could cite the software as follows, it's a free gesture for you but it tremendously help us in securing grants to further develop it:
 
-Larroque, Stephen Karl. (2021, May 31). lrq3000/csg_dicoms_anonymizer: CSG Dicoms Anonymizer v1.4.2 (Version 1.4.2). Zenodo. http://doi.org/10.5281/zenodo.4885140
+Larroque, Stephen Karl. (2021, May 31). lrq3000/csg_dicoms_anonymizer: CSG Dicoms Anonymizer v1.4.2 (Version 1.4.2). Zenodo. https://doi.org/10.5281/zenodo.4885139
 
 
 .. |LICENCE| image:: https://img.shields.io/pypi/l/csg_dicoms_anonymizer.svg

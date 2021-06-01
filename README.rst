@@ -1,7 +1,7 @@
 csg_dicoms_anonymizer
 ======================
 
-|PyPI-Status| |PyPI-Versions| |LICENCE|
+|PyPI-Status| |PyPI-Versions| |LICENCE| |Zenodo|
 
 This dicoms anonymizer/pseudonymizer was made to make your life easier as a clinician sharing data.
 
@@ -67,6 +67,13 @@ LICENSE
 -------------
 CSG Dicoms Anonymizer was initially made by Stephen Larroque <LRQ3000> for the Coma Science Group - GIGA Consciousness - CHU de Liege, Belgium. The application is licensed under MIT License.
 
+CITATION
+---------
+
+If you found this software useful and use it for a publication, we would be very thankful if you could cite the software as follows, it's a free gesture for you but it tremendously help us in securing grants to further develop it:
+
+Larroque, Stephen Karl. (2021, May 31). lrq3000/csg_dicoms_anonymizer: CSG Dicoms Anonymizer v1.4.2 (Version 1.4.2). Zenodo. http://doi.org/10.5281/zenodo.4885140
+
 
 .. |LICENCE| image:: https://img.shields.io/pypi/l/csg_dicoms_anonymizer.svg
    :target: https://raw.githubusercontent.com/lrq3000/csg_dicoms_anonymizer/master/LICENCE
@@ -75,3 +82,4 @@ CSG Dicoms Anonymizer was initially made by Stephen Larroque <LRQ3000> for the C
 .. |PyPI-Versions| image:: https://img.shields.io/pypi/pyversions/csg_dicoms_anonymizer.svg
    :target: https://pypi.python.org/pypi/csg_dicoms_anonymizer
 .. |Screenshot| image:: https://raw.githubusercontent.com/lrq3000/csg_dicoms_anonymizer/master/img/dicoms_anonymizer_gui.png
+.. |Zenodo| image:: https://zenodo.org/badge/99519861.svg :target: https://zenodo.org/badge/latestdoi/99519861

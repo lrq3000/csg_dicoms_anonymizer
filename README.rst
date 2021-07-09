@@ -7,6 +7,8 @@ This dicoms anonymizer/pseudonymizer was made to make your life easier as a clin
 
 The first goal is to remove the patient's name and replace by a pseudonym in both dicoms and a demographics csv file, but it also takes care of deleting other structures potentially containing identifiable information such as fields (eg, patient's phone number) and files (pdf, txt, csv, etc), via configurable blacklists.
 
+**WARNING: this project is not maintained anymore and is not fully compatible with Python 3. Please see alternative softwares if you want to ensure anonymization.**
+
 |Screenshot|
 
 It runs under Python 2.7 (it was not tested nor developped with compatibility with Python 3 in mind, although it might work with some slight changes).
@@ -46,6 +48,8 @@ The goal of this tool is to pseudonymize the data, not anonymize according to re
 If you want full anonymization (ie, removing/modifying all private fields), please have a look at `dicom-anon <https://github.com/chop-dbhi/dicom-anon>`_, a Python dicoms anonymizer, with configurable specifications. See also `pydicom example anonymizer <https://github.com/pydicom/pydicom/blob/master/examples/metadata_processing/plot_anonymize.py>`_ and `MATLAB's dicomanon command <http://mathworks.com/help/images/ref/dicomanon.html>`_. Note however that this is not enough for full anonymization, as you will also need to deface (be warned this might make statistical preprocessing and analysis difficult).
 
 To anonymize demographics for public release, you can have a look at the excellent `ARX-Deidentifier <https://github.com/arx-deidentifier/arx>`_, which supports various methods such as k-anonymity, l-diversity or differential privacy (this can be advantageously used as a post-processing step after csg-dicoms-anonymizer's ability to de-identify names robustly). To deface dicoms, `Jorge's Defacer <https://github.com/jorgeMFS/Defacer>`_ using nipy's quickshear algorithm and in pure Python 3 is an option to consider.
+
+If you have only a handful of DICOMs you want to anonymize (eg, less than 20 subjects), you can do so manually using `Dicom Browser <https://wiki.xnat.org/xnat-tools/dicombrowser>`_.
 
 TODO
 ---------
